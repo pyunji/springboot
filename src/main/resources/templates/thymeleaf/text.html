@@ -1,0 +1,24 @@
+<!DOCTYPE>
+
+<!-- xlms:th는 정식문서는 아니지만 자동완성해줄수도 있으니까 넣자 -->
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- this는 이파일이 가지고있는 fragment는 content이다.를 뜻한다. 이 내용이 전달된다. -->
+<th:block th:replace="~{/common/layout::setContent(~{this::content})}">
+	<th:block th:fragment="content">
+
+		<div class="card m-2">
+			<div class="card-header">Text 삽입</div>
+			<div class="card-body">
+				<h6 class="text-info">속성 삽입: th:text, th:utext</h6>
+				<hr />
+				<div>bno: <span th:text="${board.bno}"></span></div>
+				<div>btitle: <span th:text="${board.btitle}"></span></div>
+				<div>bcontent: <span th:text="${board.bcontent}"></span></div>
+			</div>
+		</div>
+
+
+
+	</th:block>
+</th:block>
+</html>
