@@ -2,6 +2,7 @@ package com.mycompany.webapp.controller;
 
 import java.util.Date;
 
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,8 +31,29 @@ public class ThymeleafController {
 				"<span style='color:red'>Thymeleaf</span> is a modern server-side <b>Java template engine</b>");
 		board.setMid("thymeleaf");
 		board.setBdate(new Date());
-		
+
 		model.addAttribute("board", board);
 		return "thymeleaf/text";
+	}
+
+	@RequestMapping("/javascript")
+	public String javascript(Model model) {
+		log.info("실행");
+		model.addAttribute("name", "홍길동");
+
+		model.addAttribute("hobby", new String[] { "영화", "여행", "드라이빙" });
+
+		Board board = new Board();
+		board.setBno(1);
+		board.setBtitle("스프링 부트 Template Engine");
+		board.setBcontent("Thymeleaf is a modern server-side Java template engine");
+		board.setMid("thymeleaf");
+		board.setBdate(new Date());
+		model.addAttribute("board", board);
+
+		JSONObject jsonObject = new JSONObject(board);
+		model.addAttribute("jsonBoard", jsonObject.toString());
+		
+		return "thymeleaf/javascript";
 	}
 }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/common/layout::setContent(~{this::content})}">
+<th:block th:fragment="content">
+	
+	<div class="card m-2">
+		<div class="card-header">
+			JavaScript 코드 삽입
+		</div>
+		<div class="card-body">
+			<script th:inline="javascript">
+				let name = [[${name}]];
+				console.log("name: ", name);
+				
+				let hobby = [[${hobby}]];
+				console.log("hobby: ", hobby);
+				
+				let board = [[${board}]];
+				console.log("board: ", board);
+				
+				let jsonBoard = JSON.parse([[${jsonBoard}]]);
+				console.log("jsonBoard: ", jsonBoard);
+			</script>
+			
+			<script th:inline="javascript">
+				// 서버사이드 데이터 바인딩
+				let name = [[${name}]];
+				// 클라이언트사이드 데이터 바인딩 (브라우저에서 실행할 때 해석되는 부분)
+				let message = `Your name is ${name}`;
+				console.log("message: ", message);
+				// ClientSide에서 실행할 때 Backtick의 바인딩 기호: ${} 
+				let data = "타임리프";
+				// `${}` : 자바 스크립트의 데이터 바인딩 기호 == jsp의 EL -> 충돌
+				// 타임리프는 [[${}]] 처럼 앞에 대괄호가 있어야 하기 때문에 자바스크립트의 ${}과 충돌나지 않는다.
+				let message = `클라이언트 데이터 바인딩:  ${data}`;
+				console.log("message: ", message);
+			</script>
+		</div>
+	</div>
+	
+</th:block>
+</th:block>
+</html>
