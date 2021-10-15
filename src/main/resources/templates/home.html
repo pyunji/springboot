@@ -1,16 +1,18 @@
 <!DOCTYPE>
+
 <html xmlns:th="http://www.thymeleaf.org">
-	<!-- 헤더 넣기 -->
-	<th:block th:replace="~{/common/layout::header}"/>
+<th:block th:replace="~{/common/layout::setContent(~{this::content})}">
+<th:block th:fragment="content">
 	
-	<div class="card">
+	<div class="card m-2">
 		<div class="card-header">
 			Home
 		</div>
 		<div class="card-body">
+			Content
 		</div>
 	</div>
 	
-	<!-- 푸터 넣기 -->
-	<th:block th:replace="~{/common/layout::footer}"/>
+</th:block>
+</th:block>
 </html>
