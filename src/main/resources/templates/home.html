@@ -1,1 +1,16 @@
-<th:block th:replace="~{/common/layout}"></th:block>
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org">
+	<!-- 헤더 넣기 -->
+	<th:block th:replace="~{/common/layout::header}"/>
+	
+	<div class="card">
+		<div class="card-header">
+			Home
+		</div>
+		<div class="card-body">
+		</div>
+	</div>
+	
+	<!-- 푸터 넣기 -->
+	<th:block th:replace="~{/common/layout::footer}"/>
+</html>
