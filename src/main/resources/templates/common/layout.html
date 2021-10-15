@@ -19,13 +19,13 @@
 					<img src="/images/logo-springboot.png" height="30" class="d-inline-block align-top">
 					Spring Boot
 				</a>
-				<div>
+				<div th:if="${session.sessionMid == null}">
 					<a href="/" class="btn btn-info btn-sm">로그인</a>
 				</div>
-				<!--  <div>
-				User:
-				 			<a href="/logout" class="btn btn-info btn-sm ml-2">로그아웃</a>
-			</div>-->
+				<div th:if="${session.sessionMid != null}">
+					<span>User: [[${session.sessionMid}]]</span>
+	 				<a href="/logout" class="btn btn-info btn-sm ml-2">로그아웃</a>
+				</div>
 			</nav>
 
 			<div class="flex-grow-1 container-fluid">
