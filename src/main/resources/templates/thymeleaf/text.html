@@ -3,7 +3,7 @@
 <!-- xlms:th는 정식문서는 아니지만 자동완성해줄수도 있으니까 넣자 -->
 <html xmlns:th="http://www.thymeleaf.org">
 <!-- this는 이파일이 가지고있는 fragment는 content이다.를 뜻한다. 이 내용이 전달된다. -->
-<th:block th:replace="~{/common/layout::setContent(~{this::content})}">
+<th:block th:replace="~{common/layout::setContent(~{this::content})}">
 	<th:block th:fragment="content">
 
 		<div class="card m-2">
