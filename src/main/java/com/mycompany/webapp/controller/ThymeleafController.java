@@ -55,10 +55,10 @@ public class ThymeleafController {
 
 		JSONObject jsonObject = new JSONObject(board);
 		model.addAttribute("jsonBoard", jsonObject.toString());
-		
+
 		return "thymeleaf/javascript";
 	}
-	
+
 	@RequestMapping("/variableExpressions")
 	public String variableExpressions(HttpSession session) {
 		log.info("실행");
@@ -68,5 +68,25 @@ public class ThymeleafController {
 			session.removeAttribute("sessionMid");
 		}
 		return "thymeleaf/variableExpressions";
+	}
+
+	@RequestMapping("/selectionVariableExpressions")
+	public String selectionVariableExpressions(Model model) {
+		log.info("실행");
+		Board board = new Board();
+		board.setBno(1);
+		board.setBtitle("Spring Boot Template Engine");
+		board.setBcontent(
+				"<span style='color:red'>Thymeleaf</span> is a modern server-side <b>Java template engine</b>");
+		board.setMid("thymeleaf");
+		board.setBdate(new Date());
+		model.addAttribute("board", board);
+		return "thymeleaf/selectionVariableExpressions";
+	}
+	
+	@RequestMapping("/messageExpressions")
+	public String messageExpressions() {
+		log.info("실행");
+		return "thymeleaf/messageExpressions";
 	}
 }
