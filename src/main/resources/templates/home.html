@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:replace="~{/common/layout::setContent(~{this::content})}">
+<th:block th:replace="~{common/layout::setContent(~{this::content})}">
 <th:block th:fragment="content">
 	
 	<div class="card m-2">
@@ -9,7 +9,8 @@
 			Home
 		</div>
 		<div class="card-body">
-			Content
+			<img th:src="@{/images/logo-springboot.png}" width="100px"/>
+			<hr/>
 		</div>
 	</div>
 	
