@@ -1,6 +1,8 @@
 package com.mycompany.webapp.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -132,5 +134,36 @@ public class ThymeleafController {
 		application.setAttribute("visitorCount", 100);
 
 		return "thymeleaf/builtinObject";
+	}
+	
+	@RequestMapping("/iteration")
+	public String getBoards(Model model) {
+		log.info("실행");
+		List<Board> list = new ArrayList<>();
+		for (int i = 10; i <= 15; i++) {
+			Board board = new Board();
+			board.setBno(i);
+			board.setBtitle("제목" + i);
+			board.setBcontent("내용" + i);
+			board.setMid("글쓴이" + i);
+			board.setBdate(new Date());
+			list.add(board);
+		}
+		model.addAttribute("list", list);
+		return "thymeleaf/iteration";
+	}
+	
+	@RequestMapping("/conditional")
+	public String conditional(@RequestParam(defaultValue = "false") boolean option, 
+			HttpSession session, Model model) {
+		log.info("실행");
+		if (option) {
+			session.setAttribute("sessionMid", "thymeleaf");
+		} else {
+			session.removeAttribute("sessionMid");
+		}
+
+		model.addAttribute("type", "b");
+		return "thymeleaf/conditional";
 	}
 }
