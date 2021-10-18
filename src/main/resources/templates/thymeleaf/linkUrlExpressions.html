@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{common/layout::setContent(~{this::content})}">
+<th:block th:fragment="content">
+	
+	<div class="card m-2">
+		<div class="card-header">
+			Link URL Expressions
+		</div>
+		<div class="card-body">
+			<!-- 절대경로를 사용할 수 있다 -->
+			<a th:href="@{https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html}" class="btn btn-info btn-sm">Absolute</a>
+			<!-- http://localhost/thymeleaf/linkUrlExpressions/t1/update -->
+			<a href="update" class="btn btn-info btn-sm">Page-relative</a>
+			<!-- http://localhost/thymeleaf/update -->
+			<a th:href="@{/thymeleaf/update}" class="btn btn-info btn-sm">Context-relative(excluded contextpath)</a>
+			<!-- http://localhost/webapp/thymeleaf/update -->
+			<a th:href="@{~/thymeleaf/update}" class="btn btn-info btn-sm">Server-relative(included contextpath)</a>
+			
+			<hr/>
+			
+			<!-- linkUrlExpressions/t1/detail?productId=xxx&pageNo=yyy -->
+			<!-- 쿼리파라미터이름=${컨트롤러가넘겨준속성이름} -->
+			<a th:href="@{/thymeleaf/linkUrlExpressions/t1/detail(productId=${productId}, pageNo=${pageNo})}" class="btn btn-info btn-sm">URL Parameters</a>
+		</div>
+	</div>
+	
+</th:block>
+</th:block>
+</html>
