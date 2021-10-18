@@ -2,6 +2,8 @@ package com.mycompany.webapp.controller;
 
 import java.util.Date;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mycompany.webapp.dto.Board;
 
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -112,5 +113,24 @@ public class ThymeleafController {
 		model.addAttribute("url2", "/t1/detail");
 
 		return "thymeleaf/linkUrlExpressions";
+	}
+	
+	@RequestMapping("/builtinObject")
+	public String builtinObject(HttpServletRequest request, HttpSession session, Model model) {
+		log.info("실행");
+
+		// request 범위에 저장
+		request.setAttribute("title", "spring boot");
+		model.addAttribute("today", new Date());
+		model.addAttribute("array", new String[] { "spring", "boot", "thymeleaf" });
+		
+		// session 범위에 저장(같은 브라우저에서 공유)
+		session.setAttribute("sessionMid", "thymeleaf");
+		
+		// application 범위에 저장(모든 브라우저에서 공유)
+		ServletContext application = session.getServletContext();
+		application.setAttribute("visitorCount", 100);
+
+		return "thymeleaf/builtinObject";
 	}
 }

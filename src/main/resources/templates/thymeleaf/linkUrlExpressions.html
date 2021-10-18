@@ -23,6 +23,10 @@
 			<!-- linkUrlExpressions/t1/detail?productId=xxx&pageNo=yyy -->
 			<!-- 쿼리파라미터이름=${컨트롤러가넘겨준속성이름} -->
 			<a th:href="@{/thymeleaf/linkUrlExpressions/t1/detail(productId=${productId}, pageNo=${pageNo})}" class="btn btn-info btn-sm">URL Parameters</a>
+			<a th:href="@{/thymeleaf/linkUrlExpressions/{typeId}/detail(typeId=${typeId}, productId=${productId}, pageNo=${pageNo})}" class="btn btn-info btn-sm">Path Variables</a>
+			<a th:href="@{${url1}(productId=${productId}, pageNo=${pageNo})}" class="btn btn-info btn-sm">URL insert1</a>
+			<!-- 홑따옴표로 문자열 표현을 해주고 더하기 해줘야 에러가 안난다 -->
+			<a th:href="@{'/thymeleaf/linkUrlExpressions' + ${url2}(productId=${productId}, pageNo=${pageNo})}" class="btn btn-info btn-sm">URL insert2</a>
 		</div>
 	</div>
 	

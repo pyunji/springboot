@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{common/layout::setContent(~{this::content})}">
+	<th:block th:fragment="content">
+
+		<div class="card m-2">
+			<div class="card-header">기본 내장 객체</div>
+			<div class="card-body">
+				<div>
+					<h6 class="text-info">param 정보 얻기</h6>
+					<div>Param Total Number: [[${param.size()}]]</div>
+					<div>Param bno: [[${param.bno}]]</div>
+					<div>Param pageNo: [[${param.pageNo}]]</div>
+				</div>
+
+				<hr />
+
+				<div>
+					<h6 class="text-info">request 속성값 얻기</h6>
+					<div>Title: [[${title}]]</div>
+					<div>Title: [[${#request.getAttribute("title")}]]</div>
+				</div>
+
+				<hr />
+
+				<div>
+					<h6 class="text-info">session 속성값 얻기</h6>
+					<!-- ${sessionMid} => request 범위에서 찾게 된다 -->
+					<div>Current User: [[${session.sessionMid}]]</div>
+					<div>Current User: [[${#session.getAttribute("sessionMid")}]]</div>
+				</div>
+
+				<hr />
+
+				<div>
+					<h6 class="text-info">application 속성값 얻기</h6>
+					<!-- ${sessionMid} => request 범위에서 찾게 된다 -->
+					<div>Visitor Count: [[${application.visitorCount}]]</div>
+					<div>Visitor Count: [[${#servletContext.getAttribute("visitorCount")}]]</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+</th:block>
+</html>
