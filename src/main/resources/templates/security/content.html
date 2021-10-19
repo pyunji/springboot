@@ -16,6 +16,7 @@
 						<a th:href="@{/logout}" class="btn btn-info btn-sm">로그아웃</a>
 						<hr />
 						<div>User: [[${#authentication.name}]]</div>
+						<div>Enail: [[${#authentication.principal.useremail}]]</div>
 						<div>Roles: [[${#authentication.authorities}]]</div>
 						<hr />
 						<div>

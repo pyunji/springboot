@@ -6,6 +6,7 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -23,6 +24,8 @@ import lombok.extern.slf4j.Slf4j;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Resource private DataSource dataSource;
+	
+	@Resource private CustomUserDetailsService customUserDetailsService;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -59,13 +62,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		log.info("configure(AuthenticationManagerBuilder auth) 실행");
-		auth.jdbcAuthentication()
-			.dataSource(dataSource)
-			// 데이터베이스에서 가져올 사용자 정보 조회 설정
-			.usersByUsernameQuery("SELECT mid, mpassword, menabled FROM member WHERE mid=?")
-			.authoritiesByUsernameQuery("SELECT mid, mrole FROM member WHERE mid=?")
-			// 패스워드 인코딩 방법 설정
-			.passwordEncoder(passwordEncoder()); // default: DelegatingPasswordEncoder
+		/*		auth.jdbcAuthentication()
+					.dataSource(dataSource)
+					// 데이터베이스에서 가져올 사용자 정보 조회 설정
+					.usersByUsernameQuery("SELECT mid, mpassword, menabled FROM member WHERE mid=?")
+					.authoritiesByUsernameQuery("SELECT mid, mrole FROM member WHERE mid=?")
+					// 패스워드 인코딩 방법 설정
+					.passwordEncoder(passwordEncoder()); // default: DelegatingPasswordEncoder
+		*/
+		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+		provider.setUserDetailsService(customUserDetailsService);
+		provider.setPasswordEncoder(passwordEncoder());
+		auth.authenticationProvider(provider);
 	}
 	
 	@Override
